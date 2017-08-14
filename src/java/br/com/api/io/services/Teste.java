@@ -24,6 +24,7 @@ public class Teste implements Serializable {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/teste")
     public String teste() {
+        
         return "true";
     }
 
