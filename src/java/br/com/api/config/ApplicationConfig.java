@@ -1,6 +1,6 @@
 package br.com.api.config;
 
-import br.com.api.io.services.Teste;
+import br.com.api.io.services.ListMethods;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
@@ -16,7 +16,7 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> resources = new HashSet<>();
-        resources.add(Teste.class);
+        resources.add(ListMethods.class);
         return resources;
     }
 
