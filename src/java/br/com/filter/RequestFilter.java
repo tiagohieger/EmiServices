@@ -1,7 +1,7 @@
 package br.com.filter;
 
+import br.com.api.io.socket.ServerManager;
 import br.com.language.Messages;
-import br.com.utils.Session;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class RequestFilter implements Filter {
             }
         }
 
-        final Boolean isCanAccess = Session.isCanAccess(httpServletRequest);
+        final Boolean isCanAccess = ServerManager.getInstance().isAuthorized(httpServletRequest);
 
         if (!isCanAccess) {
             final String msg = Messages.getInstance(null).getErrAccessDenied();

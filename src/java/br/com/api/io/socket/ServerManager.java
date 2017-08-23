@@ -9,6 +9,7 @@ import br.com.entitys.User;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.Session;
 
 /**
@@ -17,6 +18,8 @@ import javax.websocket.Session;
  */
 public class ServerManager {
 
+    private static final String SESSION_ID_PROPERTY = "session_id";
+    
     private final Map<User, Session> connectedUsers = Collections.synchronizedMap(new HashMap<>());
 
     private ServerManager() {
@@ -112,5 +115,10 @@ public class ServerManager {
 
             connectedUsers.remove(user);
         }
+    }
+    
+    public Boolean isAuthorized(final HttpServletRequest httpServletRequest) {
+        final String sessionId = httpServletRequest.getHeader(SESSION_ID_PROPERTY);
+        return sessionId != null && getUser(sessionId) != null;
     }
 }
