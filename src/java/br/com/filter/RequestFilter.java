@@ -43,7 +43,6 @@ public class RequestFilter implements Filter {
         if (!isCanAccess) {
             final String msg = Messages.getInstance(null).getErrAccessDenied();
             throw new ServletException(msg);
-            //response.getOutputStream().print(json);
         }
     }
 

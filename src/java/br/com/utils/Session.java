@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class Session {
 
-    private static final String keyHttpConnection = "key_http_connection";
+    private static final String keyHttpConnection = "session_id";
 
     public static Boolean isCanAccess(final HttpServletRequest httpServletRequest) {
         final String sessionId = httpServletRequest.getHeader(keyHttpConnection);
