@@ -1,4 +1,4 @@
-package br.com.linguage;
+package br.com.language;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -36,8 +36,15 @@ public class Messages {
         }
     }
 
-    public String getErrAccessNotPermited() {
-        return bundle.getString("err_access_not_permited");
+    public String getErrInvalidVersion() {
+        return bundle.getString("err_invalid_version");
+    }
+    
+    public String getErrAccessDenied() {
+        return bundle.getString("err_access_denied");
     }
 
+    public String getErrInvalidUser() {
+        return bundle.getString("err_invalid_user");
+    }
 }

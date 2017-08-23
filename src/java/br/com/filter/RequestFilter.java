@@ -1,6 +1,6 @@
 package br.com.filter;
 
-import br.com.linguage.Messages;
+import br.com.language.Messages;
 import br.com.utils.Session;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class RequestFilter implements Filter {
         final Boolean isCanAccess = Session.isCanAccess(httpServletRequest);
 
         if (!isCanAccess) {
-            final String msg = Messages.getInstance(null).getErrAccessNotPermited();
+            final String msg = Messages.getInstance(null).getErrAccessDenied();
             throw new ServletException(msg);
             //response.getOutputStream().print(json);
         }

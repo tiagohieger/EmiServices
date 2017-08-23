@@ -56,28 +56,60 @@ public class ServerManager {
         }
     }
 
+    public User getUser(final String sessionId) {
+
+        synchronized (connectedUsers) {
+            return connectedUsers.keySet().stream()
+                    .filter(e -> e.getSessionId().equals(sessionId))
+                    .findFirst()
+                    .orElse(null);
+        }
+    }
+
     public Session getSession(final User user) {
         synchronized (connectedUsers) {
             return connectedUsers.get(user);
         }
     }
 
-    public void remove(final Session session) {
+    public Session getSession(final String sessionId) {
+
         synchronized (connectedUsers) {
-            
-            final User user = connectedUsers.entrySet().stream()
-                        .filter(e -> e.getValue().equals(session))
-                        .map(Map.Entry::getKey)
-                        .findFirst()
-                        .orElse(null);
-            
-            connectedUsers.remove(user);
-            
+            return connectedUsers.entrySet().stream()
+                    .filter(e -> e.getKey().getSessionId().equals(sessionId))
+                    .map(Map.Entry::getValue)
+                    .findFirst()
+                    .orElse(null);
         }
     }
 
     public void remove(final User user) {
         synchronized (connectedUsers) {
+            connectedUsers.remove(user);
+        }
+    }
+
+    public void remove(final Session session) {
+        synchronized (connectedUsers) {
+            if (connectedUsers.containsValue(session)) {
+                final User user = connectedUsers.entrySet().stream()
+                        .filter(e -> e.getValue().equals(session))
+                        .map(Map.Entry::getKey)
+                        .findFirst()
+                        .orElse(null);
+
+                connectedUsers.remove(user);
+            }
+        }
+    }
+
+    public void remove(final String sessionId) {
+        synchronized (connectedUsers) {
+            final User user = connectedUsers.keySet().stream()
+                    .filter(e -> e.getSessionId().equals(sessionId))
+                    .findFirst()
+                    .orElse(null);
+
             connectedUsers.remove(user);
         }
     }
